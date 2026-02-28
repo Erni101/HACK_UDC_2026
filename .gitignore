@@ -24,12 +24,14 @@ yarn-error.log*
 .pnp/
 .pnp.js
 
-# Data files (large binaries)
-data/*.csv
-data/*.json
-data/*.xlsx
-data/*.zip
-data/*.tar.gz
+# Data files (large binaries) — keep README.md files
+data/raw/*
+data/processed/*
+data/external/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+!data/**/README.md
 
 # IDE / OS
 .vscode/
