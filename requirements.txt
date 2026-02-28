@@ -1,20 +1,24 @@
 # Dependencias del proyecto
-# Añade aquí las librerías Python que uses:
-# pip install -r requirements.txt
+# Instalar con: pip install -r requirements.txt
+# o con:        make setup
 
 # Ciencia de datos
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
+numpy>=1.26
+pandas>=2.2
+scikit-learn>=1.4
+matplotlib>=3.8
+seaborn>=0.13
 
 # Notebooks
-jupyter
-jupyterlab
+jupyter>=1.0
+jupyterlab>=4.0
 
 # Tests
-pytest
+pytest>=8.0
+pytest-cov>=5.0
+
+# Calidad de código
+ruff>=0.4
 
 # Utilidades
-python-dotenv
+python-dotenv>=1.0
