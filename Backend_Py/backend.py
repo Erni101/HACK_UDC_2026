@@ -1,11 +1,15 @@
 import requests
 import math
+import os
 from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-# 1. Pon aquí tu URL exacta de TomTom que ya tenías
-TOMTOM_URL = "https://api.tomtom.com/traffic/services/5/incidentDetails?key=o9OiRMAtBAVlYHBE8GgIhfxAH3Urvyx5&bbox=-8.45,43.30,-8.35,43.40&fields={incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description},startTime,endTime,from,to,length,delay}}}&language=es-ES"
+TOMTOM_API_KEY = os.getenv("TOMTOM_API_KEY", "")
+TOMTOM_BBOX = os.getenv("TOMTOM_BBOX", "-8.45,43.30,-8.35,43.40")
+TOMTOM_LANGUAGE = os.getenv("TOMTOM_LANGUAGE", "es-ES")
+TOMTOM_FIELDS = "{incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description},startTime,endTime,from,to,length,delay}}}"
+TOMTOM_ENDPOINT = "https://api.tomtom.com/traffic/services/5/incidentDetails"
 
 # 2. Base de datos de Hospitales en A Coruña
 # 2. Base de datos de Complejos Hospitalarios de Galicia (Red SERGAS)
@@ -28,11 +32,28 @@ def calcular_distancia(lat1, lon1, lat2, lon2):
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c
 
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "ok"}), 200
+
 @app.route('/api/accidentes', methods=['GET'])
 def obtener_accidentes():
     try:
+        if not TOMTOM_API_KEY:
+            return jsonify({"error": "Falta TOMTOM_API_KEY en variables de entorno"}), 500
+
         # Descargamos los datos de TomTom
-        respuesta = requests.get(TOMTOM_URL)
+        respuesta = requests.get(
+            TOMTOM_ENDPOINT,
+            params={
+                "key": TOMTOM_API_KEY,
+                "bbox": TOMTOM_BBOX,
+                "fields": TOMTOM_FIELDS,
+                "language": TOMTOM_LANGUAGE,
+            },
+            timeout=15,
+        )
+        respuesta.raise_for_status()
         datos = respuesta.json()
         
         # Procesamos cada accidente para buscar su hospital
@@ -64,4 +85,4 @@ def obtener_accidentes():
 
 if __name__ == '__main__':
     # Arrancamos nuestro propio servidor local
-    app.run(host = "0.0.0.0" , port=5000, debug=True)  
+    app.run(host="0.0.0.0", port=5000, debug=False)
