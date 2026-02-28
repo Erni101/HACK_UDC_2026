@@ -21,6 +21,55 @@ current_location = {
     "accuracy": 5.0
 }
 
+# Datos simulados de accidentes en A Coruña
+sample_accidents = [
+    {
+        "id": 1,
+        "name": "Accidente en Plaza María Pita",
+        "description": "Colisión entre dos vehículos",
+        "severity": "medium",
+        "geometry": {
+            "coordinates": [[43.3745, -8.3875]]
+        }
+    },
+    {
+        "id": 2,
+        "name": "Accidente en Calle Real",
+        "description": "Atropello",
+        "severity": "high",
+        "geometry": {
+            "coordinates": [[43.3720, -8.3900]]
+        }
+    },
+    {
+        "id": 3,
+        "name": "Accidente en Avenida de la Marina",
+        "description": "Vuelco de vehículo",
+        "severity": "high",
+        "geometry": {
+            "coordinates": [[43.3750, -8.3850]]
+        }
+    },
+    {
+        "id": 4,
+        "name": "Accidente en Paseo Marítimo",
+        "description": "Choque múltiple",
+        "severity": "medium",
+        "geometry": {
+            "coordinates": [[43.3690, -8.3920]]
+        }
+    },
+    {
+        "id": 5,
+        "name": "Accidente en Plaza del Humor",
+        "description": "Fuerte colisión",
+        "severity": "low",
+        "geometry": {
+            "coordinates": [[43.3760, -8.3860]]
+        }
+    }
+]
+
 
 @app.route('/api/location', methods=['GET'])
 def get_location():
@@ -119,29 +168,42 @@ def haversine(lat1, lon1, lat2, lon2):
     return 2 * R * atan2(sqrt(a), sqrt(1-a))
 
 
+@app.route('/api/accidentes', methods=['GET'])
+def get_accidents():
+    """Obtiene todos los accidentes simulados"""
+    return jsonify({
+        "status": "success",
+        "incidents": sample_accidents,
+        "total": len(sample_accidents)
+    }), 200
+
+
 @app.route('/api/proximity', methods=['GET'])
 def proximity():
-    """Calcula la distancia al accidente más cercano"""
+    """Calcula la distancia a accidentes cercanos (dentro de un radio)
+    Parámetro opcional: radius (en km, default: 5 km)
+    """
     global current_location
     
     # Tu ubicación actual
     my_lat = current_location['latitude']
     my_lon = current_location['longitude']
     
+    # Radio de búsqueda (en km)
+    radius = request.args.get('radius', 5, type=float)
+    
     try:
-        # Obtener accidentes desde tu API (o ajusta según tu implementación)
-        accidents = requests.get('http://localhost:5000/api/accidentes', timeout=5).json()
-        incidents = accidents.get('incidents', [])
+        # Usar los accidentes simulados
+        incidents = sample_accidents
         
         if not incidents:
             return jsonify({
                 "status": "success",
-                "nearest_accident_km": None,
+                "nearby_accidents": [],
                 "message": "No hay incidentes registrados"
             }), 200
         
-        min_dist = float('inf')
-        nearest_incident = None
+        nearby = []
         
         for inc in incidents:
             coords = inc.get('geometry', {}).get('coordinates', [])
@@ -156,25 +218,34 @@ def proximity():
                 
                 distance = haversine(my_lat, my_lon, acc_lat, acc_lon)
                 
-                if distance < min_dist:
-                    min_dist = distance
-                    nearest_incident = inc
+                # Solo incluir si está dentro del radio
+                if distance <= radius:
+                    nearby.append({
+                        "id": inc.get('id'),
+                        "name": inc.get('name'),
+                        "description": inc.get('description'),
+                        "severity": inc.get('severity'),
+                        "distance_km": round(distance, 2),
+                        "coordinates": {
+                            "latitude": acc_lat,
+                            "longitude": acc_lon
+                        }
+                    })
+        
+        # Ordenar por distancia
+        nearby.sort(key=lambda x: x['distance_km'])
         
         return jsonify({
             "status": "success",
-            "nearest_accident_km": round(min_dist, 2) if min_dist != float('inf') else None,
-            "nearest_incident": nearest_incident,
+            "search_radius_km": radius,
+            "nearby_accidents": nearby,
+            "total_nearby": len(nearby),
             "my_location": {
                 "latitude": my_lat,
                 "longitude": my_lon
             }
         }), 200
     
-    except requests.exceptions.RequestException as e:
-        return jsonify({
-            "status": "error",
-            "message": f"No se pudo conectar a la API de accidentes: {str(e)}"
-        }), 500
     except Exception as e:
         return jsonify({
             "status": "error",
