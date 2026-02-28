@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  # 1. Tu Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_local
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - backend_python # Grafana espera a que el backend arranque
+
+  # 2. El backend de tu compañero (Python + TomTom)
+  backend_python:
+    build: ../Backend_Py # Esto le dice a Docker que busque el código de Python en una carpeta llamada "backend"
+    container_name: api_hackathon
+    ports:
+      - "5000:5000" # El puerto donde corra tu API (ej. FastAPI o Flask)
+    restart: unless-stopped
+    environment:
+      - TOMTOM_API_KEY="o9OiRMAtBAVlYHBE8GgIhfxAH3Urvyx5" #Pasamos la API key de forma segura
