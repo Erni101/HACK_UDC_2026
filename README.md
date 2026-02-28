@@ -108,6 +108,11 @@ Edita las siguientes variables en `accidentes_tu_loki.py`:
 
 ---
 
+## Link al dashboard de Grafana.
+https://lucasvilanova71.grafana.net/public-dashboards/670fb5756d194ecdad84b83dfd0bf76a
+
+---
+
 ## Stack tecnológico
 
 - **Python 3** + Flask
