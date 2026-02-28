@@ -2,6 +2,9 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import random
 from datetime import datetime
+import requests
+from math import radians, sin, cos, atan2, sqrt
+from math import radians, cos, sin, atan2, sqrt
 
 app = Flask(__name__)
 CORS(app)
@@ -105,6 +108,78 @@ def health_check():
         "status": "healthy",
         "timestamp": datetime.now().isoformat()
     }), 200
+
+
+def haversine(lat1, lon1, lat2, lon2):
+    """Calcula la distancia entre dos puntos usando la fórmula haversine (en km)"""
+    R = 6371  # Radio de la Tierra en km
+    dlat = radians(lat2 - lat1)
+    dlon = radians(lon2 - lon1)
+    a = sin(dlat/2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon/2)**2
+    return 2 * R * atan2(sqrt(a), sqrt(1-a))
+
+
+@app.route('/api/proximity', methods=['GET'])
+def proximity():
+    """Calcula la distancia al accidente más cercano"""
+    global current_location
+    
+    # Tu ubicación actual
+    my_lat = current_location['latitude']
+    my_lon = current_location['longitude']
+    
+    try:
+        # Obtener accidentes desde tu API (o ajusta según tu implementación)
+        accidents = requests.get('http://localhost:5000/api/accidentes', timeout=5).json()
+        incidents = accidents.get('incidents', [])
+        
+        if not incidents:
+            return jsonify({
+                "status": "success",
+                "nearest_accident_km": None,
+                "message": "No hay incidentes registrados"
+            }), 200
+        
+        min_dist = float('inf')
+        nearest_incident = None
+        
+        for inc in incidents:
+            coords = inc.get('geometry', {}).get('coordinates', [])
+            if coords:
+                # Manejo de diferentes formatos de coordenadas
+                if isinstance(coords[0], list):
+                    acc_lon = coords[0][0]
+                    acc_lat = coords[0][1]
+                else:
+                    acc_lon = coords[0]
+                    acc_lat = coords[1]
+                
+                distance = haversine(my_lat, my_lon, acc_lat, acc_lon)
+                
+                if distance < min_dist:
+                    min_dist = distance
+                    nearest_incident = inc
+        
+        return jsonify({
+            "status": "success",
+            "nearest_accident_km": round(min_dist, 2) if min_dist != float('inf') else None,
+            "nearest_incident": nearest_incident,
+            "my_location": {
+                "latitude": my_lat,
+                "longitude": my_lon
+            }
+        }), 200
+    
+    except requests.exceptions.RequestException as e:
+        return jsonify({
+            "status": "error",
+            "message": f"No se pudo conectar a la API de accidentes: {str(e)}"
+        }), 500
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Error al calcular proximidad: {str(e)}"
+        }), 500
 
 
 if __name__ == '__main__':
