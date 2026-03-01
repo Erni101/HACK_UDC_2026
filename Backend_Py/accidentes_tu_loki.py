@@ -4,6 +4,7 @@ import json
 import urllib3
 
 # 1. Silenciamos las advertencias molestas
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- RELLENA ESTOS VALORES ---  
@@ -66,7 +67,7 @@ def main():
                     for acc in lista_accidentes:  
                         status = enviar_a_loki(acc)  
                         print(f"Enviado accidente → Loki [{status}]") 
-                        time.sleep(0.5) 
+                        time.sleep(1) 
                 else:  
                     print("Tranquilidad absoluta. Sin accidentes activos.")  
                     
@@ -76,4 +77,5 @@ def main():
         time.sleep(INTERVALO_SEGUNDOS)  
 
 if __name__ == "__main__":  
+    print("Iniciando")
     main()
