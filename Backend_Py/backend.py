@@ -1,9 +1,14 @@
 import requests
 import math
+import os
 from flask import Flask, jsonify
 import time 
+from pathlib import Path
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
 
 
 ##EJECUTAR ESTE  BACKEND PRIMERO ANTES DE HACER NGROK HTTP 5000
@@ -11,8 +16,8 @@ app = Flask(__name__)
 
 
 # --- Configuración de API Keys ---
-API_KEY_NORTE = "o9OiRMAtBAVlYHBE8GgIhfxAH3Urvyx5"
-API_KEY_SUR   = "AZ2ibh4j2bp6LqNjeljk0MMdEeKthfpo"
+API_KEY_NORTE = os.getenv("API_KEY_NORTE")
+API_KEY_SUR = os.getenv("API_KEY_SUR")
 
 # --- Base de datos de Hospitales en Galicia ---
 HOSPITALES = [
@@ -74,6 +79,9 @@ def enriquecer_incidente(incidente):
 
 def obtener_accidentes():
     try:
+        if not API_KEY_NORTE or not API_KEY_SUR:
+            return jsonify({"error": "Faltan variables API_KEY_NORTE/API_KEY_SUR en .env"}), 500
+
         todos_los_incidentes = []
 
         for bbox, api_key in CUADRANTES:

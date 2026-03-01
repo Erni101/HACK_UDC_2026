@@ -77,7 +77,7 @@
                         "root_selector": "[{\"count\": ((.incidents // []) | length)}]",
                         "source": "url",
                         "type": "json",
-                        "url": "https://api.tomtom.com/traffic/services/5/incidentDetails?key=o9OiRMAtBAVlYHBE8GgIhfxAH3Urvyx5&bbox=-8.7,42.2,-8.1,43.4&fields=%7Bincidents%7Btype%2Cgeometry%7Btype%2Ccoordinates%7D%2Cproperties%7Bid%2CiconCategory%2CmagnitudeOfDelay%2Cdelay%2Cevents%7Bdescription%7D%7D%7D%7D&language=en-GB&timeValidityFilter=present",
+                        "url": "https://api.tomtom.com/traffic/services/5/incidentDetails?key=REEMPLAZAR_API_KEY&bbox=-8.7,42.2,-8.1,43.4&fields=%7Bincidents%7Btype%2Cgeometry%7Btype%2Ccoordinates%7D%2Cproperties%7Bid%2CiconCategory%2CmagnitudeOfDelay%2Cdelay%2Cevents%7Bdescription%7D%7D%7D%7D&language=en-GB&timeValidityFilter=present",
                         "url_options": {
                           "data": "",
                           "method": "GET",
@@ -395,7 +395,7 @@
                         "root_selector": "[{\"totalDelay\": ([(.incidents // [])[].properties.delay // 0] | add // 0)}]",
                         "source": "url",
                         "type": "json",
-                        "url": "https://api.tomtom.com/traffic/services/5/incidentDetails?key=o9OiRMAtBAVlYHBE8GgIhfxAH3Urvyx5&bbox=-8.7,42.2,-8.1,43.4&fields=%7Bincidents%7Btype%2Cgeometry%7Btype%2Ccoordinates%7D%2Cproperties%7Bid%2CiconCategory%2CmagnitudeOfDelay%2Cdelay%2Cevents%7Bdescription%7D%7D%7D%7D&language=en-GB&timeValidityFilter=present",
+                        "url": "https://api.tomtom.com/traffic/services/5/incidentDetails?key=REEMPLAZAR_API_KEY&bbox=-8.7,42.2,-8.1,43.4&fields=%7Bincidents%7Btype%2Cgeometry%7Btype%2Ccoordinates%7D%2Cproperties%7Bid%2CiconCategory%2CmagnitudeOfDelay%2Cdelay%2Cevents%7Bdescription%7D%7D%7D%7D&language=en-GB&timeValidityFilter=present",
                         "url_options": {
                           "data": "",
                           "method": "GET",

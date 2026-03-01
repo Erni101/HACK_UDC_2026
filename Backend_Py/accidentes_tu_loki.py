@@ -2,18 +2,22 @@ import requests
 import time
 import json
 import urllib3
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 
 # 1. Silenciamos las advertencias molestas
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
+
 # --- RELLENA ESTOS VALORES ---  
-LOKI_URL = "https://logs-prod-043.grafana.net/loki/api/v1/push"  
-LOKI_USER = "1499023"  
-# ¡OJO AQUÍ! Pon tu token largo de Grafana Cloud (glc_...)
-LOKI_PASSWORD = "glc_eyJvIjoiMTY4Mjk0MCIsIm4iOiJoYWNrdWRjLWhhY2t1ZGMiLCJrIjoiNEVjUThNNjdGRDJxZHNZVjF1RDE5Yzk4IiwibSI6eyJyIjoidXMifX0="
-API_URL = "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes"  
-INTERVALO_SEGUNDOS = 60  
+LOKI_URL = os.getenv("LOKI_URL", "")
+LOKI_USER = os.getenv("LOKI_USER", "")
+LOKI_PASSWORD = os.getenv("LOKI_PASSWORD", "")
+API_URL = os.getenv("API_URL", "")
+INTERVALO_SEGUNDOS = int(os.getenv("INTERVALO_SEGUNDOS", "60"))
 
 def enviar_a_loki(accidente):  
     timestamp = str(time.time_ns())  
@@ -48,6 +52,10 @@ def enviar_a_loki(accidente):
         return f"Bloqueo_Red ({type(e).__name__})"
 
 def main():  
+    if not all([LOKI_URL, LOKI_USER, LOKI_PASSWORD, API_URL]):
+        print("❌ Faltan variables en .env: LOKI_URL, LOKI_USER, LOKI_PASSWORD o API_URL")
+        return
+
     print("🚀 Iniciando radar de accidentes... (Pulsa Ctrl+C para parar)")
     while True:  
         try:  
