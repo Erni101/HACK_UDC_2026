@@ -1,0 +1,1747 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2beta1",
+  "kind": "DashboardWithAccessInfo",
+  "metadata": {
+    "name": "lu9pqhm",
+    "namespace": "stacks-1541234",
+    "uid": "e696d35a-2951-4bc9-a02e-c66c2d3dfed4",
+    "resourceVersion": "1772328377397642",
+    "generation": 32,
+    "creationTimestamp": "2026-02-28T05:38:12Z",
+    "labels": {},
+    "annotations": {
+      "grafana.app/createdBy": "user:cfejivbulwl4wc",
+      "grafana.app/folder": "",
+      "grafana.app/saved-from-ui": "Grafana Cloud (steady)",
+      "grafana.app/updatedBy": "user:cfejivbulwl4wc",
+      "grafana.app/updatedTimestamp": "2026-03-01T01:26:17Z"
+    }
+  },
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "query": {
+            "datasource": {
+              "name": "-- Grafana --"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
+          }
+        }
+      }
+    ],
+    "cursorSync": "Off",
+    "description": "Real-time traffic incident monitoring powered by TomTom Traffic Incidents API",
+    "editable": true,
+    "elements": {
+      "panel-1": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "columns": [
+                          {
+                            "selector": "count",
+                            "text": "Total Active Accidents",
+                            "type": "number"
+                          }
+                        ],
+                        "format": "table",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "[{\"count\": ((.incidents // []) | length)}]",
+                        "source": "url",
+                        "type": "json",
+                        "url": "https://api.tomtom.com/traffic/services/5/incidentDetails?key=o9OiRMAtBAVlYHBE8GgIhfxAH3Urvyx5&bbox=-8.7,42.2,-8.1,43.4&fields=%7Bincidents%7Btype%2Cgeometry%7Btype%2Ccoordinates%7D%2Cproperties%7Bid%2CiconCategory%2CmagnitudeOfDelay%2Cdelay%2Cevents%7Bdescription%7D%7D%7D%7D&language=en-GB&timeValidityFilter=present",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET",
+                          "params": []
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Live count of active traffic incidents from TomTom API",
+          "id": 1,
+          "links": [],
+          "title": "Total Active Accidents",
+          "transparent": true,
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "decimals": 0,
+                  "noValue": "0",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#1F60C4",
+                        "value": 0
+                      },
+                      {
+                        "color": "#E05B35",
+                        "value": 1
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "text": {
+                  "titleSize": 22,
+                  "valueSize": 80
+                },
+                "textMode": "value",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-10": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "columns": [
+                          {
+                            "selector": "Hospital",
+                            "text": "Hospital",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "Sin retraso",
+                            "text": "Sin retraso",
+                            "type": "number"
+                          },
+                          {
+                            "selector": "Leve",
+                            "text": "Leve",
+                            "type": "number"
+                          },
+                          {
+                            "selector": "Moderado",
+                            "text": "Moderado",
+                            "type": "number"
+                          },
+                          {
+                            "selector": "Crítico",
+                            "text": "Crítico",
+                            "type": "number"
+                          }
+                        ],
+                        "format": "table",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "[(.incidents // []) | group_by(.propiedades_extra.hospital_asignado // \"Desconocido\")[] | {\"Hospital\": (.[0].propiedades_extra.hospital_asignado // \"Desconocido\"), \"Sin retraso\": (map(select(.properties.magnitudeOfDelay == 0)) | length), \"Leve\": (map(select(.properties.magnitudeOfDelay == 2)) | length), \"Moderado\": (map(select(.properties.magnitudeOfDelay == 3)) | length), \"Crítico\": (map(select(.properties.magnitudeOfDelay == 4)) | length)}] | sort_by(.Hospital)",
+                        "source": "url",
+                        "type": "json",
+                        "url": "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET",
+                          "params": []
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Comparativa apilada de niveles de severidad por hospital de referencia",
+          "id": 10,
+          "links": [],
+          "title": "Severidad por Hospital — Desglose Comparativo",
+          "vizConfig": {
+            "group": "barchart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "fillOpacity": 85,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineWidth": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Sin retraso"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "green",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Leve"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "yellow",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Moderado"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "orange",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Crítico"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "red",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "barRadius": 0,
+                "barWidth": 0.97,
+                "fullHighlight": false,
+                "groupWidth": 0.7,
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "orientation": "auto",
+                "showValue": "auto",
+                "stacking": "normal",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "none"
+                },
+                "xTickLabelRotation": 0,
+                "xTickLabelSpacing": 0
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-2": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "columns": [
+                          {
+                            "selector": "totalDelay",
+                            "text": "Total Delay",
+                            "type": "number"
+                          }
+                        ],
+                        "format": "table",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "[{\"totalDelay\": ([(.incidents // [])[].properties.magnitudeOfDelay // 0] | add // 0)}]",
+                        "source": "url",
+                        "type": "json",
+                        "url": "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET",
+                          "params": []
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Combined traffic delay from all active incidents",
+          "id": 2,
+          "links": [],
+          "title": "Total Delay Time",
+          "transparent": true,
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 0,
+                  "noValue": "0 s",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#1F60C4",
+                        "value": 0
+                      },
+                      {
+                        "color": "#E05B35",
+                        "value": 60
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 70
+                      },
+                      {
+                        "color": "#6ED0E0",
+                        "value": 80
+                      },
+                      {
+                        "color": "#EF843C",
+                        "value": 90
+                      },
+                      {
+                        "color": "#E24D42",
+                        "value": 100
+                      },
+                      {
+                        "color": "#1F78C1",
+                        "value": 110
+                      },
+                      {
+                        "color": "#BA43A9",
+                        "value": 120
+                      },
+                      {
+                        "color": "#705DA0",
+                        "value": 130
+                      }
+                    ]
+                  },
+                  "unit": "s"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "text": {
+                  "titleSize": 22,
+                  "valueSize": 80
+                },
+                "textMode": "value",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-3": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "columns": [
+                          {
+                            "selector": "lat",
+                            "text": "lat",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "lon",
+                            "text": "lon",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "description",
+                            "text": "Description",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "severity",
+                            "text": "Severity",
+                            "type": "number"
+                          },
+                          {
+                            "selector": "h_lat",
+                            "text": "h_lat",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "h_lon",
+                            "text": "h_lon",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "hospital",
+                            "text": "hospital",
+                            "type": "string"
+                          }
+                        ],
+                        "filters": [],
+                        "format": "table",
+                        "global_query_id": "",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "[(.incidents // [])[] | . as $i | {\n  \"lat\": (if ($i.geometry.coordinates[0] | type) == \"number\" then $i.geometry.coordinates[1] else $i.geometry.coordinates[0][1] end), \n  \"lon\": (if ($i.geometry.coordinates[0] | type) == \"number\" then $i.geometry.coordinates[0] else $i.geometry.coordinates[0][0] end), \n  \"h_lat\": $i.propiedades_extra.h_lat,\n  \"h_lon\": $i.propiedades_extra.h_lon,\n  \"hospital\": $i.propiedades_extra.hospital_asignado,\n  \"description\": ($i.properties.events[0].description // \"Incidente\")\n}]",
+                        "source": "url",
+                        "type": "json",
+                        "url": "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET",
+                          "params": []
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "columns": [
+                          {
+                            "selector": "nombre",
+                            "text": "nombre",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "lat",
+                            "text": "lat",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "lon",
+                            "text": "lon",
+                            "type": "string"
+                          }
+                        ],
+                        "data": "[{\"nombre\":\"CHUAC (A Coruña)\",\"lat\":43.3411,\"lon\":-8.3813},{\"nombre\":\"CHUS (Santiago de Compostela)\",\"lat\":42.8695,\"lon\":-8.5656},{\"nombre\":\"CHUF - Arquitecto Marcide (Ferrol)\",\"lat\":43.5042,\"lon\":-8.2285},{\"nombre\":\"HULA (Lugo)\",\"lat\":43.0031,\"lon\":-7.5250},{\"nombre\":\"CHUO (Ourense)\",\"lat\":42.3275,\"lon\":-7.8540},{\"nombre\":\"CHOP - Montecelo (Pontevedra)\",\"lat\":42.4331,\"lon\":-8.6148},{\"nombre\":\"Hospital Álvaro Cunqueiro (Vigo)\",\"lat\":42.1889,\"lon\":-8.7150}]",
+                        "filters": [],
+                        "format": "table",
+                        "global_query_id": "",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "",
+                        "source": "inline",
+                        "type": "json",
+                        "url": "",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET"
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "columns": [
+                          {
+                            "selector": "Name",
+                            "text": "Name",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "lat",
+                            "text": "lat",
+                            "type": "number"
+                          },
+                          {
+                            "selector": "lon",
+                            "text": "lon",
+                            "type": "number"
+                          },
+                          {
+                            "selector": "OID",
+                            "text": "OID",
+                            "type": "number"
+                          }
+                        ],
+                        "data": "Name,lat,lon,ID\nPAC de Santiago de Compostela,42.8712,-8.5367,PAC_SCQ_01\nPAC de A Coruña (Casa do Mar),43.3551,-8.4019,PAC_LCG_02\nPAC de Lugo (Fingoi),43.0035,-7.5501,PAC_LGO_03\nPAC de Ourense (Calle Concello),42.3438,-7.8633,PAC_OOU_04\nPAC de Pontevedra (A Parda),42.4276,-8.6362,PAC_PO_05\nPAC de Vigo (Calle Pizarro),42.2319,-8.7128,PAC_VGO_06\nPAC de Ferrol (Fontenla Maristany),43.4842,-8.2327,PAC_FER_07\nPAC de Vilagarcía de Arousa,42.5931,-8.7615,PAC_VIL_08\nPAC de Monforte de Lemos,42.5222,-7.5134,PAC_MON_09\nPAC de Carballo,43.2135,-8.6892,PAC_CAR_10\nPAC de Lalín,42.6617,-8.1136,PAC_LAL_11\nPAC de Ribeira,42.5564,-8.9931,PAC_RIB_12\nPAC de Burela,43.6592,-7.3544,PAC_BUR_13\nPAC de Verín,41.9392,-7.4361,PAC_VER_14\nPAC de Cangas,42.2631,-8.7844,PAC_CAN_15",
+                        "filters": [],
+                        "format": "table",
+                        "global_query_id": "",
+                        "parser": "backend",
+                        "root_selector": "",
+                        "source": "inline",
+                        "type": "csv",
+                        "url": "",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET"
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Real-time traffic incidents plotted from TomTom geometry coordinates",
+          "id": 3,
+          "links": [],
+          "title": "Incident Risk Heatmap",
+          "transparent": true,
+          "vizConfig": {
+            "group": "geomap",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "fixedColor": "red",
+                    "mode": "fixed"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Description"
+                    },
+                    "properties": [
+                      {
+                        "id": "links",
+                        "value": [
+                          {
+                            "targetBlank": true,
+                            "title": "Mandar ambulancia",
+                            "url": "https://www.google.com/maps/dir/?api=1&origin=${__data.fields.hospital}&destination=${__data.fields.lat},${__data.fields.lon}&travelmode=driving"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "basemap": {
+                  "config": {
+                    "showLabels": true,
+                    "theme": "light"
+                  },
+                  "name": "Layer 0",
+                  "noRepeat": false,
+                  "opacity": 1,
+                  "type": "carto"
+                },
+                "controls": {
+                  "mouseWheelZoom": true,
+                  "showAttribution": true,
+                  "showDebug": false,
+                  "showMeasure": false,
+                  "showScale": false,
+                  "showZoom": true
+                },
+                "layers": [
+                  {
+                    "config": {
+                      "showLegend": false,
+                      "style": {
+                        "color": {
+                          "fixed": "#cc1f90"
+                        },
+                        "opacity": 0.7,
+                        "rotation": {
+                          "fixed": 0,
+                          "max": 360,
+                          "min": -360,
+                          "mode": "mod"
+                        },
+                        "size": {
+                          "fixed": 9,
+                          "max": 15,
+                          "min": 2
+                        },
+                        "symbol": {
+                          "fixed": "https://raw.githubusercontent.com/Templarian/MaterialDesign/master/svg/hospital-building.svg",
+                          "mode": "fixed"
+                        },
+                        "symbolAlign": {
+                          "horizontal": "center",
+                          "vertical": "center"
+                        },
+                        "textConfig": {
+                          "fontSize": 12,
+                          "offsetX": 0,
+                          "offsetY": 0,
+                          "textAlign": "center",
+                          "textBaseline": "middle"
+                        }
+                      }
+                    },
+                    "filterData": {
+                      "id": "byRefId",
+                      "options": "C"
+                    },
+                    "location": {
+                      "mode": "auto"
+                    },
+                    "name": "PACS",
+                    "tooltip": true,
+                    "type": "markers"
+                  },
+                  {
+                    "config": {
+                      "showLegend": false,
+                      "style": {
+                        "color": {
+                          "fixed": "dark-blue"
+                        },
+                        "opacity": 1,
+                        "rotation": {
+                          "fixed": 0,
+                          "max": 360,
+                          "min": -360,
+                          "mode": "mod"
+                        },
+                        "size": {
+                          "field": "A hospital",
+                          "fixed": 10,
+                          "max": 16,
+                          "min": 15
+                        },
+                        "symbol": {
+                          "field": "",
+                          "fixed": "https://cdn.jsdelivr.net/gh/Templarian/MaterialDesign-SVG@master/svg/hospital-marker.svg",
+                          "mode": "fixed"
+                        },
+                        "symbolAlign": {
+                          "horizontal": "center",
+                          "vertical": "center"
+                        },
+                        "textConfig": {
+                          "fontSize": 12,
+                          "offsetX": 0,
+                          "offsetY": 0,
+                          "textAlign": "center",
+                          "textBaseline": "middle"
+                        }
+                      }
+                    },
+                    "filterData": {
+                      "id": "byRefId",
+                      "options": "B"
+                    },
+                    "location": {
+                      "mode": "auto"
+                    },
+                    "name": "Hospitales",
+                    "tooltip": true,
+                    "type": "markers"
+                  },
+                  {
+                    "config": {
+                      "showLegend": false,
+                      "style": {
+                        "color": {
+                          "fixed": "#020202"
+                        },
+                        "fillOpacity": 0.75,
+                        "lineWidth": 1,
+                        "opacity": 0.6,
+                        "rotation": {
+                          "fixed": 0,
+                          "max": 360,
+                          "min": -360,
+                          "mode": "mod"
+                        },
+                        "size": {
+                          "fixed": 7,
+                          "max": 15,
+                          "min": 2,
+                          "mode": "fixed"
+                        },
+                        "symbol": {
+                          "fixed": "img/icons/unicons/car.svg",
+                          "mode": "fixed"
+                        },
+                        "symbolAlign": {
+                          "h": "center",
+                          "v": "center"
+                        }
+                      }
+                    },
+                    "filterData": {
+                      "id": "byRefId",
+                      "options": "A"
+                    },
+                    "layer-tooltip": false,
+                    "location": {
+                      "mode": "auto"
+                    },
+                    "name": "Traffic Incidents",
+                    "tooltip": true,
+                    "type": "markers"
+                  },
+                  {
+                    "config": {
+                      "blur": 15,
+                      "radius": 8,
+                      "weight": {
+                        "fixed": 1,
+                        "max": 1,
+                        "min": 0
+                      }
+                    },
+                    "filterData": {
+                      "id": "byRefId",
+                      "options": "A"
+                    },
+                    "location": {
+                      "mode": "auto"
+                    },
+                    "name": "Heatmap",
+                    "opacity": 0.7,
+                    "tooltip": true,
+                    "type": "heatmap"
+                  }
+                ],
+                "tooltip": {
+                  "mode": "details"
+                },
+                "view": {
+                  "allLayers": true,
+                  "dashboardVariable": false,
+                  "id": "coords",
+                  "lat": 42.8,
+                  "lon": -8.4,
+                  "noRepeat": false,
+                  "zoom": 7
+                }
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-4": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "builder",
+                        "expr": "{service_name=\"mapa-accidentes\"} |= ``",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "this is a speciall panel with backup",
+          "id": 4,
+          "links": [],
+          "title": "Log Panel",
+          "transparent": true,
+          "vizConfig": {
+            "group": "logs",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "dedupStrategy": "numbers",
+                "detailsMode": "sidebar",
+                "displayedFields": [],
+                "enableInfiniteScrolling": true,
+                "enableLogDetails": true,
+                "fontSize": "small",
+                "showControls": true,
+                "showFieldSelector": true,
+                "showTime": true,
+                "sortOrder": "Descending",
+                "unwrappedColumns": false,
+                "wrapLogMessage": false
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-5": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time({service_name=\"mapa-accidentes\"}[15m]))",
+                        "instant": false,
+                        "legendFormat": "Accidents",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Count of new accident log entries from mapa-accidentes over time",
+          "id": 5,
+          "links": [],
+          "title": "New Accidents Over Time",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 1,
+                    "drawStyle": "line",
+                    "fillOpacity": 51,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "smooth",
+                    "lineStyle": {
+                      "fill": "solid"
+                    },
+                    "lineWidth": 2,
+                    "pointSize": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-6": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 6,
+          "links": [],
+          "title": "",
+          "vizConfig": {
+            "group": "text",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "code": {
+                  "language": "plaintext",
+                  "showLineNumbers": false,
+                  "showMiniMap": false
+                },
+                "content": "## 📊 Análisis Estadístico de Incidentes\nDistribuciones en tiempo real de los incidentes activos por región hospitalaria, severidad y tipo de evento.",
+                "mode": "markdown"
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-7": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "columns": [
+                          {
+                            "selector": "hospital",
+                            "text": "Hospital",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "accidentes",
+                            "text": "Accidentes",
+                            "type": "number"
+                          }
+                        ],
+                        "format": "table",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "[(.incidents // []) | group_by(.propiedades_extra.hospital_asignado // \"Desconocido\")[] | {hospital: (.[0].propiedades_extra.hospital_asignado // \"Desconocido\"), accidentes: length}] | sort_by(-.accidentes)",
+                        "source": "url",
+                        "type": "json",
+                        "url": "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET",
+                          "params": []
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Número de incidentes activos agrupados por hospital de referencia asignado",
+          "id": 7,
+          "links": [],
+          "title": "Accidentes por Hospital / Región",
+          "vizConfig": {
+            "group": "barchart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "fillOpacity": 80,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineWidth": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "barRadius": 0,
+                "barWidth": 0.97,
+                "fullHighlight": false,
+                "groupWidth": 0.7,
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "orientation": "horizontal",
+                "showValue": "always",
+                "stacking": "none",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                },
+                "xTickLabelRotation": 0,
+                "xTickLabelSpacing": 0
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-8": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "columns": [
+                          {
+                            "selector": "severidad",
+                            "text": "Severidad",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "accidentes",
+                            "text": "Accidentes",
+                            "type": "number"
+                          }
+                        ],
+                        "format": "table",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "[(.incidents // []) | group_by(.properties.magnitudeOfDelay)[] | {severidad: (.[0].properties.magnitudeOfDelay | if . == 0 then \"0 · Sin retraso\" elif . == 2 then \"2 · Leve\" elif . == 3 then \"3 · Moderado\" else \"4 · Crítico\" end), accidentes: length}]",
+                        "source": "url",
+                        "type": "json",
+                        "url": "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET",
+                          "params": []
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Histograma de incidentes según magnitud de retraso (0=sin retraso, 4=corte total)",
+          "id": 8,
+          "links": [],
+          "title": "Distribución por Severidad",
+          "vizConfig": {
+            "group": "barchart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "fillOpacity": 80,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineWidth": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "barRadius": 0,
+                "barWidth": 0.97,
+                "fullHighlight": false,
+                "groupWidth": 0.7,
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "orientation": "horizontal",
+                "showValue": "always",
+                "stacking": "none",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                },
+                "xTickLabelRotation": 0,
+                "xTickLabelSpacing": 0
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      },
+      "panel-9": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-infinity"
+                      },
+                      "group": "yesoreyeram-infinity-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "columns": [
+                          {
+                            "selector": "tipo",
+                            "text": "Tipo de incidente",
+                            "type": "string"
+                          },
+                          {
+                            "selector": "accidentes",
+                            "text": "Accidentes",
+                            "type": "number"
+                          }
+                        ],
+                        "format": "table",
+                        "parser": "jq-backend",
+                        "range": false,
+                        "root_selector": "[(.incidents // []) | group_by(.properties.events[0].description // \"Desconocido\")[] | {tipo: (.[0].properties.events[0].description // \"Desconocido\"), accidentes: length}] | sort_by(-.accidentes)",
+                        "source": "url",
+                        "type": "json",
+                        "url": "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes",
+                        "url_options": {
+                          "data": "",
+                          "method": "GET",
+                          "params": []
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Distribución por categoría de evento según TomTom",
+          "id": 9,
+          "links": [],
+          "title": "Tipos de Incidente",
+          "vizConfig": {
+            "group": "barchart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "fillOpacity": 80,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineWidth": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "barRadius": 0,
+                "barWidth": 0.97,
+                "fullHighlight": false,
+                "groupWidth": 0.7,
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "orientation": "horizontal",
+                "showValue": "always",
+                "stacking": "none",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                },
+                "xTickLabelRotation": 0,
+                "xTickLabelSpacing": 0
+              }
+            },
+            "version": "13.0.0-22326976726.patch2"
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-1"
+              },
+              "height": 8,
+              "width": 12,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-2"
+              },
+              "height": 8,
+              "width": 12,
+              "x": 12,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-3"
+              },
+              "height": 16,
+              "width": 24,
+              "x": 0,
+              "y": 8
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-4"
+              },
+              "height": 8,
+              "width": 12,
+              "x": 0,
+              "y": 24
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-5"
+              },
+              "height": 8,
+              "width": 12,
+              "x": 12,
+              "y": 24
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-6"
+              },
+              "height": 3,
+              "width": 24,
+              "x": 0,
+              "y": 32
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-7"
+              },
+              "height": 9,
+              "width": 8,
+              "x": 0,
+              "y": 35
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-8"
+              },
+              "height": 9,
+              "width": 8,
+              "x": 8,
+              "y": 35
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-9"
+              },
+              "height": 9,
+              "width": 8,
+              "x": 16,
+              "y": 35
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-10"
+              },
+              "height": 10,
+              "width": 24,
+              "x": 0,
+              "y": 44
+            }
+          }
+        ]
+      }
+    },
+    "links": [],
+    "liveNow": false,
+    "preload": false,
+    "tags": [],
+    "timeSettings": {
+      "autoRefresh": "",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-6h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
+    },
+    "title": "🚨 Emergency Traffic Response",
+    "variables": [
+      {
+        "kind": "CustomVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": [
+              "Accidentes"
+            ],
+            "value": [
+              "Accidentes"
+            ]
+          },
+          "hide": "dontHide",
+          "includeAll": false,
+          "label": "Selecciona la Capa:",
+          "multi": true,
+          "name": "capa_activa",
+          "options": [],
+          "query": "Accidentes, Hospitales, Ambulancias, Velocidades",
+          "skipUrlSync": false,
+          "valuesFormat": "csv"
+        }
+      }
+    ]
+  },
+  "status": {}
+}
