@@ -1,0 +1,26 @@
+import requests
+
+API_KEY_SUR = "AZ2ibh4j2bp6LqNjeljk0MMdEeKthfpo"
+
+import requests
+
+API_KEY_SUR = "AZ2ibh4j2bp6LqNjeljk0MMdEeKthfpo"
+
+# Cuadrantes ligeramente ajustados + zoom subido a 10
+cuadrantes_sur = [
+    ("-8.9,42.0,-7.8,42.8", 10),  # Suroeste ajustado
+    ("-7.8,42.0,-6.8,42.8", 10),  # Sudeste ajustado
+]
+
+for bbox, zoom in cuadrantes_sur:
+    url = (
+        f"https://api.tomtom.com/traffic/services/5/incidentDetails"
+        f"?key={API_KEY_SUR}"
+        f"&bbox={bbox}"
+        f"&fields={{incidents{{type,geometry{{type,coordinates}},properties{{magnitudeOfDelay,events{{description,code}}}}}}}}"
+        f"&zoom={zoom}"
+    )
+    r = requests.get(url, timeout=15)
+    print(f"Cuadrante {bbox} → HTTP {r.status_code} → {len(r.json().get('incidents', []))} incidentes")
+    if r.status_code != 200:
+        print(f"  Error detalle: {r.text[:300]}")

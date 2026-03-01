@@ -1,6 +1,7 @@
 import requests
 import math
 from flask import Flask, jsonify
+import time 
 
 app = Flask(__name__)
 
@@ -23,10 +24,9 @@ HOSPITALES = [
 CUADRANTES = [
     ("-9.3,43.0,-8.0,43.8", API_KEY_NORTE),  # Noroeste
     ("-8.0,43.0,-6.7,43.8", API_KEY_NORTE),  # Noreste
-    ("-9.1,41.8,-7.8,42.8", API_KEY_SUR),    # Suroeste
-    ("-7.8,41.8,-6.7,43.0", API_KEY_SUR),    # Sudeste
+    ("-8.9,42.0,-7.8,42.8", API_KEY_SUR),    # Suroeste
+    ("-7.8,42.0,-6.8,42.8", API_KEY_SUR),    # Sudeste
 ]
-
 TOMTOM_URL = "https://api.tomtom.com/traffic/services/5/incidentDetails?key={key}&bbox={bbox}&fields={{incidents{{type,geometry{{type,coordinates}},properties{{magnitudeOfDelay,events{{description,code}}}}}}}}&zoom=9"
 
 def calcular_distancia(lat1, lon1, lat2, lon2):
@@ -73,7 +73,7 @@ def obtener_accidentes():
 
         for bbox, api_key in CUADRANTES:
             url = TOMTOM_URL.format(key=api_key, bbox=bbox)
-            respuesta = requests.get(url, timeout=10)
+            respuesta = requests.get(url, timeout=20)
 
             if respuesta.status_code != 200:
                 app.logger.warning(
@@ -83,6 +83,7 @@ def obtener_accidentes():
 
             for incidente in respuesta.json().get("incidents", []):
                 todos_los_incidentes.append(enriquecer_incidente(incidente))
+            time.sleep(0.5)
 
         return jsonify({"incidents": todos_los_incidentes})
 

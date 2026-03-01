@@ -1,0 +1,32 @@
+import requests, json
+
+r = requests.get(
+    "https://blae-wrinkly-jill.ngrok-free.dev/api/accidentes",
+    headers={"ngrok-skip-browser-warning": "true"},
+    verify=False,
+    timeout=30
+)
+
+incidentes = r.json().get("incidents", [])
+print(f"Total: {len(incidentes)}")
+
+# Clasificar por zona geográfica
+norte, sur = [], []
+for inc in incidentes:
+    coords = inc["geometry"]["coordinates"]
+    lat = coords[0][1] if isinstance(coords[0], list) else coords[1]
+    if lat > 42.8:
+        norte.append(inc)
+    else:
+        sur.append(inc)
+
+print(f"Incidentes NORTE (lat > 42.8): {len(norte)}")
+print(f"Incidentes SUR   (lat < 42.8): {len(sur)}")
+
+# Muestra un ejemplo de cada zona
+if norte:
+    p = norte[0]["propiedades_extra"]
+    print(f"\nEjemplo Norte → lat:{p['latitud']} lon:{p['longitud']}")
+if sur:
+    p = sur[0]["propiedades_extra"]
+    print(f"Ejemplo Sur   → lat:{p['latitud']} lon:{p['longitud']}")
